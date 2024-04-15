@@ -1,17 +1,66 @@
 [
     {
+        "id": 0,
         "username": "romain",
-        "password": "pwd",
-        "role": "manager"
+        "password": "",
+        "role": "manager",
+        "manager": null,
+        "manages": [2, 4, 5]
     },
     {
+        "id": 1,
         "username": "charlotte",
-        "password": "pwd",
-        "role": "rh"
+        "password": "",
+        "role": "rh",
+        "manager": null,
+        "manages": []
     },
     {
+        "id": 2,
         "username": "toto",
         "password": "pwd",
-        "role": "user"
+        "role": "user",
+        "manager": 0,
+        "manages": []
+    },
+    {
+        "id": 3,
+        "username": "guts",
+        "password": "pwd",
+        "role": "manager",
+        "manager": 0,
+        "manages": [3, 6, 7]
+    },
+    {
+        "id": 4,
+        "username": "sansundertale",
+        "password": "pwd",
+        "role": "user",
+        "manager": 0,
+        "manages": []
+    },
+    {
+        "id": 5,
+        "username": "pierrick",
+        "password": "pwd",
+        "role": "user",
+        "manager": 0,
+        "manages": []
+    },
+    {
+        "id": 6,
+        "username": "flashmcqueen",
+        "password": "pwd",
+        "role": "user",
+        "manager": 3,
+        "manages": []
+    },
+    {
+        "id": 7,
+        "username": "alderiate",
+        "password": "pwd",
+        "role": "user",
+        "manager": 3,
+        "manages": []
     }
 ]

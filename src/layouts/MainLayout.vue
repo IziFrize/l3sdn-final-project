@@ -10,12 +10,18 @@
           aria-label="Menu"
           @click="toggleLeftDrawer"
         />
+        <q-btn
+          flat
+          dense
+          round
+          icon="logout"
+          aria-label="Déconnexion"
+          @click="logout"
+        />
 
         <q-toolbar-title>
-          Quasar App
+          Cét'RM
         </q-toolbar-title>
-
-        <div>Quasar v{{ $q.version }}</div>
       </q-toolbar>
     </q-header>
 
@@ -48,6 +54,10 @@
 <script>
 import { defineComponent, ref } from 'vue'
 import EssentialLink from 'components/EssentialLink.vue'
+import { useLoginStore } from 'stores/loginStore'
+import { useRouter } from 'vue-router'
+
+const loginStore = useLoginStore()
 
 const linksList = [
   {
@@ -109,6 +119,10 @@ export default defineComponent({
       leftDrawerOpen,
       toggleLeftDrawer () {
         leftDrawerOpen.value = !leftDrawerOpen.value
+      },
+      logout () {
+        loginStore.logout()
+        this.$router.replace('/login')
       }
     }
   }
