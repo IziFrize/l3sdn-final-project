@@ -30,5 +30,13 @@
         "interviewee_id": 7,
         "interviewer_id": 3,
         "comments": "Discuss terms and conditions of employment."
+    },
+    {
+        "id": 4,
+        "date": "2024-04-28",
+        "time": "16:00",
+        "interviewee_id": 0,
+        "interviewer_id": 0,
+        "comments": "Discuss terms and conditions of employment."
     }
 ]
