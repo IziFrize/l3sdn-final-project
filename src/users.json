@@ -5,7 +5,11 @@
         "password": "",
         "role": "manager",
         "manager": null,
-        "manages": [2, 4, 5]
+        "manages": [2, 4, 5],
+        "date_of_birth": "15/06/1985",
+        "salary": 50000,
+        "address": "123 Avenue Q, Paris",
+        "phone": "0123456789"
     },
     {
         "id": 1,
@@ -13,7 +17,11 @@
         "password": "",
         "role": "rh",
         "manager": null,
-        "manages": []
+        "manages": [],
+        "date_of_birth": "22/03/1990",
+        "salary": 45000,
+        "address": "456 Street R, Marseille",
+        "phone": "9876543210"
     },
     {
         "id": 2,
@@ -21,15 +29,23 @@
         "password": "pwd",
         "role": "user",
         "manager": 0,
-        "manages": []
+        "manages": [],
+        "date_of_birth": "10/01/1992",
+        "salary": 35000,
+        "address": "789 Avenue S, Lyon",
+        "phone": "1234567890"
     },
     {
         "id": 3,
         "username": "guts",
         "password": "pwd",
         "role": "manager",
-        "manager": 0,
-        "manages": [3, 6, 7]
+        "manager": null,
+        "manages": [6, 7],
+        "date_of_birth": "05/05/1983",
+        "salary": 52000,
+        "address": "101 Avenue T, Toulouse",
+        "phone": "0987654321"
     },
     {
         "id": 4,
@@ -37,7 +53,11 @@
         "password": "pwd",
         "role": "user",
         "manager": 0,
-        "manages": []
+        "manages": [],
+        "date_of_birth": "09/09/1995",
+        "salary": 33000,
+        "address": "234 Road U, Nice",
+        "phone": "2345678901"
     },
     {
         "id": 5,
@@ -45,7 +65,11 @@
         "password": "pwd",
         "role": "user",
         "manager": 0,
-        "manages": []
+        "manages": [],
+        "date_of_birth": "28/02/1987",
+        "salary": 32000,
+        "address": "567 Lane V, Strasbourg",
+        "phone": "3456789012"
     },
     {
         "id": 6,
@@ -53,7 +77,11 @@
         "password": "pwd",
         "role": "user",
         "manager": 3,
-        "manages": []
+        "manages": [],
+        "date_of_birth": "15/07/1989",
+        "salary": 34000,
+        "address": "890 Boulevard W, Bordeaux",
+        "phone": "4567890123"
     },
     {
         "id": 7,
@@ -61,6 +89,10 @@
         "password": "pwd",
         "role": "user",
         "manager": 3,
-        "manages": []
+        "manages": [],
+        "date_of_birth": "11/11/1986",
+        "salary": 33000,
+        "address": "321 Square X, Nantes",
+        "phone": "5678901234"
     }
 ]

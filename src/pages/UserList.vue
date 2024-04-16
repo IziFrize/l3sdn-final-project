@@ -1,44 +1,106 @@
 <template>
+  <div>
     <q-table
-      title="Liste des utilisateurs"
       :rows="users"
-      :column="columns"
+      :columns="columns"
       row-key="id"
-    />
-  </template>
-  
-  <script>
-  import axios from 'axios' // Assurez-vous que Axios est installé
-  
-  export default {
-    data() {
-      return {
-        users: [],
-        columns: [
-          { name: 'username', required: true, label: 'Nom d’utilisateur', align: 'left', field: row => row.username, sortable: true },
-          { name: 'role', label: 'Rôle', align: 'left', field: 'role', sortable: true },
-          { name: 'manager', label: 'ID Manager', align: 'left', field: 'manager', sortable: true },
-          { name: 'manages', label: 'Gère (IDs)', align: 'left', field: row => row.manages.join(', ') }
-        ]
-      }
-    },
-    mounted() {
-      this.fetchUsers()
-    },
-    methods: {
-      async fetchUsers() {
-        try {
-          const response = await axios.get('/path/to/your/users.json') // Modifiez ceci selon votre configuration
-          this.users = response.data
-        } catch (error) {
-          
-        }
+    >
+      <template v-slot:body-cell-edit="props">
+        <q-td :props="props">
+          <q-btn color="primary" @click="openEditDialog(props.row)">Modifier</q-btn>
+        </q-td>
+      </template>
+    </q-table>
+
+    <q-dialog v-model="dialogOpen" persistent>
+      <q-card>
+        <q-card-section class="row items-center q-gutter-sm">
+          <q-input v-model="editableUser.username" filled label="Username" />
+          <q-input v-model="editableUser.role" filled label="Role" />
+          <q-input v-model="editableUser.date_of_birth" filled label="Date of Birth" mask="##/##/####" :rules="[val => /^\d{2}\/\d{2}\/\d{4}$/.test(val) || 'Date format must be DD/MM/YYYY']" />
+          <q-input v-model="editableUser.salary" type="number" filled label="Salary" />
+          <q-input v-model="editableUser.address" filled label="Address" />
+          <q-input v-model="editableUser.phone" filled label="Phone" />
+        </q-card-section>
+        <q-card-section align="right">
+          <q-btn flat label="Annuler" color="negative" @click="dialogOpen = false" />
+          <q-btn flat label="Enregistrer" color="positive" @click="saveChanges" />
+        </q-card-section>
+      </q-card>
+    </q-dialog>
+  </div>
+</template>
+
+
+<script>
+import { ref } from 'vue'
+import userData from 'src/users.json' 
+
+export default {
+  setup() {
+    const users = ref([...userData])
+    const editableUser = ref({})
+    const dialogOpen = ref(false)
+
+    const columns = [
+      { name: 'username', required: true, label: 'Username', align: 'left', field: 'username', sortable: true },
+      { name: 'role', align: 'left', label: 'Role', field: 'role', sortable: true },
+      {
+        name: 'manager',
+        align: 'left',
+        label: 'Manager',
+        field: row => {
+          const manager = users.value.find(u => u.id === row.manager)
+          return manager ? manager.username : ''
+        },
+        sortable: true
+      },
+      {
+        name: 'manages',
+        align: 'left',
+        label: 'Manages',
+        field: row => row.manages.map(id => {
+          const user = users.value.find(u => u.id === id)
+          return user ? user.username : 'N/A'
+        }).join(', '),
+        sortable: true
+      },
+      { name: 'edit', label: 'Modifier', field: 'edit', sortable: false, align: 'center' }
+    ]
+
+    function openEditDialog(user) {
+      editableUser.value = { ...user }
+      dialogOpen.value = true
+    }
+
+    function saveChanges() {
+      const index = users.value.findIndex(u => u.id === editableUser.value.id)
+      if (index !== -1) {
+        users.value[index] = { ...editableUser.value }
+        dialogOpen.value = false
+        
       }
     }
+
+    return {
+      users,
+      columns,
+      dialogOpen,
+      editableUser,
+      openEditDialog,
+      saveChanges
+    }
   }
-  </script>
-  
-  <style scoped>
-  /* Ajoutez ici des styles si nécessaire */
-  </style>
-  
+}
+</script>
+
+<style scoped>
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 8px;
+  text-align: left;
+}
+</style>

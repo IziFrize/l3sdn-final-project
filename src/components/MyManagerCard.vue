@@ -20,7 +20,7 @@ export default {
     setup() {
         const loginStore = useLoginStore()
 
-        // Ensure loginStore.user is available and has a manager
+        
         const getManagerName = computed(() => {
             if (loginStore.user && loginStore.user.manager && users[loginStore.user.manager]) {
                 return users[loginStore.user.manager]['username']
