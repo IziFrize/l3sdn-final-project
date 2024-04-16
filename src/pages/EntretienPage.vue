@@ -6,7 +6,7 @@
           <q-item v-for="interview in interviewerInterviews" :key="interview.id" clickable>
             <q-item-section>
               <q-item-label>{{ interview.date }} à {{ interview.time }}</q-item-label>
-              <q-item-label caption>Nom de rendez-vous: {{ interview.interviewee_id }}</q-item-label>
+              <q-item-label caption>Nom de l'interviewee: {{ getUsername(interview.interviewee_id) }}</q-item-label>
               <q-item-label caption>{{ interview.comments }}</q-item-label>
             </q-item-section>
           </q-item>
@@ -18,7 +18,7 @@
           <q-item v-for="interview in intervieweeInterviews" :key="interview.id" clickable>
             <q-item-section>
               <q-item-label>{{ interview.date }} à {{ interview.time }}</q-item-label>
-              <q-item-label caption>Interviewer ID: {{ interview.interviewer_id }}</q-item-label>
+              <q-item-label caption>Nom de l'interviewer: {{ getUsername(interview.interviewer_id) }}</q-item-label>
               <q-item-label caption>{{ interview.comments }}</q-item-label>
             </q-item-section>
           </q-item>
@@ -29,32 +29,34 @@
   
   <script>
   import { ref, onMounted } from 'vue'
-  import interviewsData from 'src/entretiens.json' 
+  import interviewsData from 'src/entretiens.json'
+  import usersData from 'src/users.json' 
   import { useLoginStore } from 'src/stores/loginStore'
+  
   export default {
     setup() {
       const interviews = ref([])
       const loginStore = useLoginStore() 
       const userId = loginStore.user.id
+      const users = ref(usersData)
       const interviewerInterviews = ref([])
       const intervieweeInterviews = ref([])
-
+  
+      const getUsername = (id) => {
+        const user = users.value.find(user => user.id === id)
+        return user ? user.username : 'Inconnu'
+      }
+  
       onMounted(() => {
         interviews.value = interviewsData
         interviewerInterviews.value = interviews.value.filter(interview => interview.interviewer_id === userId)
         intervieweeInterviews.value = interviews.value.filter(interview => interview.interviewee_id === userId)
       })
-      const getinterviewee = computed(() => {
-            if (loginStore.user && loginStore.user.manager && users[loginStore.user.manager]) {
-                return users[loginStore.user.manager]['username']
-            }
-            return null
-        })
-      
   
       return {
         interviewerInterviews,
-        intervieweeInterviews
+        intervieweeInterviews,
+        getUsername
       }
     }
   }
