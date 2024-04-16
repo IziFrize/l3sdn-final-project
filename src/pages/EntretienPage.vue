@@ -26,7 +26,7 @@
         </q-list>
       </div>
   
-      <!-- Dialog pour les détails de l'entretien -->
+      <!-- Dialog for viewing and editing interview details -->
       <q-dialog v-model="dialogOpen">
         <q-card>
           <q-card-section>
@@ -80,6 +80,8 @@
               style="width: 100%"
             />
             <q-input v-model="newInterview.object" label="Objet de l'entretien" filled />
+            <q-input v-model="newInterview.date" filled type="date" label="Date de l'entretien" />
+            <q-input v-model="newInterview.time" filled type="time" label="Heure de l'entretien" />
           </q-card-section>
           <q-card-actions align="right">
             <q-btn v-close-popup flat label="Annuler" color="negative" />
@@ -101,7 +103,7 @@
       const loginStore = useLoginStore()
       const userId = loginStore.user.id
       const users = ref(usersData)
-      const interviews = ref([])
+      const interviews = ref(interviewsData)
       const interviewerInterviews = ref([])
       const intervieweeInterviews = ref([])
       const dialogOpen = ref(false)
@@ -116,14 +118,16 @@
       const convokeDialogOpen = ref(false)
       const newInterview = ref({
         interviewee_id: '',
-        object: ''
+        object: '',
+        date: '',
+        time: ''
       })
       const userOptions = users.value.map(user => ({ id: user.id, username: user.username }))
   
-      const getUsername = (id) => {
-        const user = users.value.find(user => user.id === id)
-        return user ? user.username : 'Inconnu'
-      }
+    const getUsername = (id) => {
+      const user = users.value.find(user => user.id === id)
+      return user ? user.username : 'Inconnu'
+    }
   
       const openDialog = (interview) => {
         dialogOpen.value = true
@@ -139,12 +143,24 @@
       }
   
       const convokeInterview = () => {
-        console.log('Nouvel entretien convoqué:', newInterview.value)
+        const newEntretien = {
+          id: interviews.value.length + 1,
+          date: newInterview.value.date,
+          time: newInterview.value.time,
+          interviewee_id: newInterview.value.interviewee_id,
+          interviewer_id: userId,
+          comments: newInterview.value.object
+        }
+  
+        interviews.value.push(newEntretien)
+        interviewerInterviews.value.push(newEntretien)
         convokeDialogOpen.value = false
+        newInterview.value = { interviewee_id: '', object: '', date: '', time: '' }
+  
+        console.log('Nouvel entretien convoqué:', newEntretien)
       }
   
       onMounted(() => {
-        interviews.value = interviewsData
         interviewerInterviews.value = interviews.value.filter(interview => interview.interviewer_id === userId)
         intervieweeInterviews.value = interviews.value.filter(interview => interview.interviewee_id === userId)
       })
