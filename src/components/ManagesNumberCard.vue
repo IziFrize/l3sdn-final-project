@@ -2,8 +2,8 @@
     <div>
         <q-card class="manages-number-card">
             <q-card-section class="text-center">
-                <div class="title">Nombre de managés</div>
-                <div class="number">{{ loginStore.user.manages.length }}</div>
+                <div class="title">Nombre de collaborateurs</div>
+                <div class="number">{{ loginStore.user && loginStore.user.manages ? loginStore.user.manages.length : 0 }}</div>
             </q-card-section>
         </q-card>
     </div>

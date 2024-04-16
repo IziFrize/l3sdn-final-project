@@ -3,15 +3,16 @@
         <q-card class="my-manager-card">
             <q-card-section class="text-center">
                 <div class="title">Mon Manager</div>
-                <div v-if="loginStore.user.manager" class="name">{{ getManagerName }}</div>
-                <div v-else class="name">X</div>
+                <!-- Utilisation directe de la computed property -->
+                <div v-if="getManagerName" class="name">{{ getManagerName }}</div>
+                <div v-else class="name">Manager non disponible</div>
             </q-card-section>
         </q-card>
     </div>
 </template>
 
 <script>
-import { computed } from 'vue' // Import the computed function from the vue package
+import { computed } from 'vue'
 import users from 'src/users.json'
 import { useLoginStore } from 'stores/loginStore'
 
@@ -19,11 +20,12 @@ export default {
     setup() {
         const loginStore = useLoginStore()
 
+        // Ensure loginStore.user is available and has a manager
         const getManagerName = computed(() => {
-            if (loginStore.user.manager && users[loginStore.user.manager]) {
+            if (loginStore.user && loginStore.user.manager && users[loginStore.user.manager]) {
                 return users[loginStore.user.manager]['username']
             }
-            return ''
+            return null
         })
 
         return {

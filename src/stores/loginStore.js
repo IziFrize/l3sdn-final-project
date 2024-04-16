@@ -13,6 +13,7 @@ export const useLoginStore = defineStore('login', {
         logout() {
             this.isAuthenticated = false
             this.user = null
+            window.location.replace('/')
         },
     },
 })

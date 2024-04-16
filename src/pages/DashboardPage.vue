@@ -6,6 +6,7 @@
 </template>
 
 <script>
+import { onMounted } from 'vue'
 import { useLoginStore } from 'stores/loginStore'
 import { useRouter } from 'vue-router'
 import ManagesNumberCard from 'components/ManagesNumberCard.vue'
@@ -21,9 +22,11 @@ export default {
         const loginStore = useLoginStore()
         const router = useRouter()
 
-        if (!loginStore.isAuthenticated) {
-            router.push('/login')
-        }
+        onMounted(() => {
+            if (!loginStore.isAuthenticated) {
+                router.push('/login')
+            }
+        })
     }
 }
 </script>

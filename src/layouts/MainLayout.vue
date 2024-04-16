@@ -55,7 +55,7 @@
 import { defineComponent, ref } from 'vue'
 import EssentialLink from 'components/EssentialLink.vue'
 import { useLoginStore } from 'stores/loginStore'
-import { useRouter } from 'vue-router'
+import { useRoute } from 'vue-router'
 
 const loginStore = useLoginStore()
 
@@ -122,7 +122,6 @@ export default defineComponent({
       },
       logout () {
         loginStore.logout()
-        this.$router.replace('/login')
       }
     }
   }
