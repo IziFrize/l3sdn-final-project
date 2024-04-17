@@ -58,7 +58,7 @@ export default {
       {
         name: 'manages',
         align: 'left',
-        label: 'Manages',
+        label: 'Managés',
         field: row => row.manages.map(id => {
           const user = users.value.find(u => u.id === id)
           return user ? user.username : 'N/A'

@@ -5,7 +5,7 @@
         "time": "14:00",
         "interviewee_id": 2,
         "interviewer_id": 0,
-        "comments": "Initial screening for the engineering position."
+        "comments": "Sélection initiale pour le poste d'ingénieur."
     },
     {
         "id": 2,
@@ -13,7 +13,7 @@
         "time": "10:00",
         "interviewee_id": 4,
         "interviewer_id": 1,
-        "comments": "Second round interview, focus on technical skills."
+        "comments": "Deuxième entretien, axé sur les compétences techniques."
     },
     {
         "id": 3,
@@ -21,7 +21,7 @@
         "time": "09:00",
         "interviewee_id": 5,
         "interviewer_id": 3,
-        "comments": "Final interview with department manager."
+        "comments": "Entretien final avec le responsable du département."
     },
     {
         "id": 4,
@@ -29,7 +29,7 @@
         "time": "16:00",
         "interviewee_id": 7,
         "interviewer_id": 3,
-        "comments": "Discuss terms and conditions of employment."
+        "comments": "Discuter des modalités et conditions d'emploi."
     },
     {
         "id": 4,
@@ -37,6 +37,6 @@
         "time": "16:00",
         "interviewee_id": 0,
         "interviewer_id": 0,
-        "comments": "Discuss terms and conditions of employment."
+        "comments": "Discuter des modalités et conditions d'emploi."
     }
 ]

@@ -3,9 +3,8 @@
         <q-card class="my-manager-card">
             <q-card-section class="text-center">
                 <div class="title">Mon Manager</div>
-                <!-- Utilisation directe de la computed property -->
                 <div v-if="getManagerName" class="name">{{ getManagerName }}</div>
-                <div v-else class="name">Manager non disponible</div>
+                <div v-else class="name">-</div>
             </q-card-section>
         </q-card>
     </div>
@@ -22,7 +21,7 @@ export default {
 
         
         const getManagerName = computed(() => {
-            if (loginStore.user && loginStore.user.manager && users[loginStore.user.manager]) {
+            if (loginStore.user && loginStore.user.manager !== null && users[loginStore.user.manager]) {
                 return users[loginStore.user.manager]['username']
             }
             return null
@@ -52,7 +51,7 @@ export default {
 }
 
 .my-manager-card {
-    background-color: #f2e6ff;
+    background-color: #e6ffe8;
     width: 200px;
     height: 150px;
     border-radius: 10px;

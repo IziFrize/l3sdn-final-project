@@ -2,7 +2,7 @@
     <div>
         <q-card class="manages-number-card">
             <q-card-section class="text-center">
-                <div class="title">Nombre de collaborateurs</div>
+                <div class="title">Nombre de managés</div>
                 <div class="number">{{ loginStore.user && loginStore.user.manages ? loginStore.user.manages.length : 0 }}</div>
             </q-card-section>
         </q-card>
@@ -39,7 +39,7 @@ export default {
 }
 
 .manages-number-card {
-    background-color: #f2e6ff;
+    background-color: #e6ffe8;
     width: 200px;
     height: 150px;
     border-radius: 10px;
