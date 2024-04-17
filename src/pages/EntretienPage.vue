@@ -70,7 +70,7 @@
           <q-card-section>
             <div class="text-h6">Convoquer un nouvel entretien</div>
             <q-select
-              v-model="newInterview.interviewee_id"
+              v-if="userOptions"
               :options="userOptions"
               option-value="id"
               option-label="username"
@@ -97,21 +97,25 @@
   import { useLoginStore } from 'src/stores/loginStore'
   import axios from 'axios'
   const interviews = ref([])
+  const users = ref([])
+  const userOptions = ref([])
+
   onMounted(async () => {
+   
+        const interview = await axios.get('https://rod-apps-restis-api-01.azurewebsites.net/api/gregsacha/entretiens')
+        interviews.value = interview.data
+        //console.log(interviews)
+        const userz = await axios.get('https://rod-apps-restis-api-01.azurewebsites.net/api/gregsacha/users')
+        users.value = userz.data
+        //console.log(users)
         interviewerInterviews.value = interviews.value.filter(interview => interview.interviewer_id === userId)
         intervieweeInterviews.value = interviews.value.filter(interview => interview.interviewee_id === userId)
-        const interview = await axios.get('https://rod-apps-restis-api-01.azurewebsites.net/api/gregsacha/entretiens')
-        console.log(interview)
-        interviews.value = interview.data
-        console.log(interviews)
+        userOptions.value = users.value.map(user => user.username)
+        console.log(userOptions)
       })
 
       const loginStore = useLoginStore()
       const userId = loginStore.user.id
-      const users = ref(usersData)
-      
-
-
       const interviewerInterviews = ref([])
       const intervieweeInterviews = ref([])
       const dialogOpen = ref(false)
@@ -130,7 +134,7 @@
         date: '',
         time: ''
       })
-      const userOptions = users.value.map(user => ({ id: user.id, username: user.username }))
+      
   
     const getUsername = (id) => {
       const user = users.value.find(user => user.id === id)
