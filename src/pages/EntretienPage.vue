@@ -90,18 +90,28 @@
     </q-page>
   </template>
   
-  <script>
+  <script setup>
   import { ref, onMounted } from 'vue'
   import interviewsData from 'src/entretiens.json'
   import usersData from 'src/users.json'
   import { useLoginStore } from 'src/stores/loginStore'
-  
-  export default {
-    setup() {
+  import axios from 'axios'
+  const interviews = ref([])
+  onMounted(async () => {
+        interviewerInterviews.value = interviews.value.filter(interview => interview.interviewer_id === userId)
+        intervieweeInterviews.value = interviews.value.filter(interview => interview.interviewee_id === userId)
+        const interview = await axios.get('https://rod-apps-restis-api-01.azurewebsites.net/api/gregsacha/entretiens')
+        console.log(interview)
+        interviews.value = interview.data
+        console.log(interviews)
+      })
+
       const loginStore = useLoginStore()
       const userId = loginStore.user.id
       const users = ref(usersData)
-      const interviews = ref(interviewsData)
+      
+
+
       const interviewerInterviews = ref([])
       const intervieweeInterviews = ref([])
       const dialogOpen = ref(false)
@@ -158,28 +168,11 @@
         console.log('Nouvel entretien convoqué:', newEntretien)
       }
   
-      onMounted(() => {
-        interviewerInterviews.value = interviews.value.filter(interview => interview.interviewer_id === userId)
-        intervieweeInterviews.value = interviews.value.filter(interview => interview.interviewee_id === userId)
-      })
+      
   
-      return {
-        interviewerInterviews,
-        intervieweeInterviews,
-        getUsername,
-        openDialog,
-        saveDetails,
-        dialogOpen,
-        tab,
-        details,
-        convokeDialogOpen,
-        openConvokeDialog,
-        newInterview,
-        convokeInterview,
-        userOptions
-      }
-    }
-  }
+      
+      
+   
   </script>
   
   <style scoped>
