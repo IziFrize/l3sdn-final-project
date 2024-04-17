@@ -85,3 +85,12 @@ export default defineComponent({
 })
 </script>
 
+<style>
+  .q-toolbar-title {
+    font-size: 18px;
+  }
+
+  .q-toolbar {
+    background-color: purple;
+  }
+</style>

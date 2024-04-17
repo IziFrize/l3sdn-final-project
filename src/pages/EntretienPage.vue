@@ -8,8 +8,15 @@
               <q-item-label>{{ interview.date }} à {{ interview.time }}</q-item-label>
               <q-item-label caption>Nom de l'interviewee: {{ getUsername(interview.interviewee_id) }}</q-item-label>
               <q-item-label caption>{{ interview.comments }}</q-item-label>
-              <q-btn @click="openDialog(interview)">Détails</q-btn>
             </q-item-section>
+            <q-btn
+                flat
+                dense
+                round
+                icon="visibility"
+                color="accent"
+                @click="openDialog(interview)"
+              />
           </q-item>
         </q-list>
       </div>
@@ -26,35 +33,26 @@
         </q-list>
       </div>
   
-      <!-- Dialog for viewing and editing interview details -->
       <q-dialog v-model="dialogOpen">
         <q-card>
           <q-card-section>
-            <q-tabs v-model="tab" align="justify">
-              <q-tab name="work" label="Travail effectué cette année" />
-              <q-tab name="current-objectives" label="Objectifs actuels" />
-              <q-tab name="next-year-objectives" label="Objectifs pour l'année prochaine" />
-              <q-tab name="notes" label="Notes" />
-              <q-tab name="rating" label="Évaluation" />
-            </q-tabs>
-            <q-separator />
-            <q-tab-panels v-model="tab" animated>
-              <q-tab-panel name="work">
+            <q-stepper v-model="tab" bordered>
+              <q-step name="work" title="Travail effectué cette année">
                 <q-input v-model="details.workDone" type="textarea" />
-              </q-tab-panel>
-              <q-tab-panel name="current-objectives">
+              </q-step>
+              <q-step name="current-objectives" title="Objectifs actuels">
                 <q-input v-model="details.currentObjectives" type="textarea" />
-              </q-tab-panel>
-              <q-tab-panel name="next-year-objectives">
+              </q-step>
+              <q-step name="next-year-objectives" title="Objectifs pour l'année prochaine">
                 <q-input v-model="details.nextYearObjectives" type="textarea" />
-              </q-tab-panel>
-              <q-tab-panel name="notes">
+              </q-step>
+              <q-step name="notes" title="Notes">
                 <q-input v-model="details.notes" type="textarea" />
-              </q-tab-panel>
-              <q-tab-panel name="rating">
+              </q-step>
+              <q-step name="rating" title="Évaluation">
                 <q-rating v-model="details.rating" max="5" />
-              </q-tab-panel>
-            </q-tab-panels>
+              </q-step>
+            </q-stepper>
           </q-card-section>
           <q-card-actions align="right">
             <q-btn v-close-popup flat label="Fermer" color="negative" />
@@ -65,7 +63,7 @@
   
       
       <div class="fixed-bottom-right">
-        <q-btn fab color="primary" icon="event" label="Convoquer entretien" @click="openConvokeDialog" />
+        <q-btn fab color="accent" icon="event" label="Convoquer entretien" @click="openConvokeDialog" />
       </div>
       <q-dialog v-model="convokeDialogOpen">
         <q-card>

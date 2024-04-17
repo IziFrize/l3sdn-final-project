@@ -7,7 +7,14 @@
     >
       <template v-slot:body-cell-edit="props">
         <q-td :props="props">
-          <q-btn color="primary" @click="openEditDialog(props.row)">Modifier</q-btn>
+          <q-btn
+            flat
+            dense
+            round
+            icon="edit"
+            color="accent"
+            @click="openEditDialog(props.row)"
+          />
         </q-td>
       </template>
     </q-table>
@@ -65,7 +72,7 @@ export default {
         }).join(', '),
         sortable: true
       },
-      { name: 'edit', label: 'Modifier', field: 'edit', sortable: false, align: 'center' }
+      { name: 'edit', label: ' ', field: 'edit', sortable: false, align: 'center' }
     ]
 
     function openEditDialog(user) {

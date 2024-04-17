@@ -13,7 +13,7 @@
                         label="Username"
                         dense
                     ></q-input>
-                    <q-input
+                    <q-input 
                         v-model="password"
                         outlined
                         label="Password"
@@ -24,7 +24,7 @@
 
                 <q-card-actions align="right">
                     <q-btn
-                        color="primary"
+                        color="accent"
                         label="Connexion"
                         @click="login"
                     ></q-btn>

@@ -1,8 +1,10 @@
 <template>
-    <div>
-        <ManagesNumberCard class="top-left-card" />
-        <MyManagerCard class="top-right-card" />
-        <NextInterviewCard class="top-middle-card" />
+    <div class="dashboard">
+        <div class="card-container">
+            <ManagesNumberCard class="card" />
+            <MyManagerCard class="card" />
+            <NextInterviewCard class="card" />
+        </div>
     </div>
 </template>
 
@@ -35,28 +37,25 @@ export default {
 </script>
 
 <style scoped>
-    .top-left-card {
-        position: absolute;
-        top: 70px;
-        left: 10px;
-        grid-column: 1 / span 3;
-        grid-row: 1 / span 3;
-    }
+.dashboard {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100vh;
+}
 
-    .top-right-card {
-        position: absolute;
-        top: 70px;
-        right: 10px;
-        grid-column: 4 / span 3;
-        grid-row: 1 / span 3;
-    }
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
 
-    .top-middle-card {
-        position: absolute;
-        top: 70px;
-        left: 50%;
-        transform: translateX(-50%);
-        grid-column: 2 / span 3;
-        grid-row: 1 / span 3;
-    }
+.card {
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 </style>

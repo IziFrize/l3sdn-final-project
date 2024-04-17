@@ -39,7 +39,7 @@ export default {
 }
 
 .manages-number-card {
-    background-color: #e6ffe8;
+    background-color: #f2e6ff;
     width: 200px;
     height: 150px;
     border-radius: 10px;
