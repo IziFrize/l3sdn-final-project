@@ -39,15 +39,23 @@
 </template>
 
 
-<script>
-import { ref } from 'vue'
-import userData from 'src/users.json' 
+<script setup>
+import axios from 'axios'
+import { ref, onMounted } from 'vue'
 
-export default {
-  setup() {
-    const users = ref([...userData])
-    const editableUser = ref({})
-    const dialogOpen = ref(false)
+const editableUser = ref({})
+const dialogOpen = ref(false)   
+const users = ref([])
+
+onMounted(async () => {
+  const user = await axios.get('https://rod-apps-restis-api-01.azurewebsites.net/api/gregsacha/users')
+  console.log(user)
+  users.value = user.data
+  console.log(users)
+
+})
+    
+    
 
     const columns = [
       { name: 'username', required: true, label: 'Username', align: 'left', field: 'username', sortable: true },
@@ -89,16 +97,6 @@ export default {
       }
     }
 
-    return {
-      users,
-      columns,
-      dialogOpen,
-      editableUser,
-      openEditDialog,
-      saveChanges
-    }
-  }
-}
 </script>
 
 <style scoped>
