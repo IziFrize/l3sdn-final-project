@@ -34,25 +34,33 @@
       </div>
   
       <q-dialog v-model="dialogOpen">
-        <q-card>
+        <q-card class="dialog-content">
           <q-card-section>
-            <q-stepper v-model="tab" bordered>
-              <q-step name="work" title="Travail effectué cette année">
+            <q-tabs v-model="tab" align="justify">
+              <q-tab name="work" label="Travail effectué cette année" />
+              <q-tab name="current-objectives" label="Objectifs actuels" />
+              <q-tab name="next-year-objectives" label="Objectifs pour l'année prochaine" />
+              <q-tab name="notes" label="Notes" />
+              <q-tab name="rating" label="Évaluation" />
+            </q-tabs>
+            <q-separator />
+            <q-tab-panels v-model="tab" animated>
+              <q-tab-panel name="work">
                 <q-input v-model="details.workDone" type="textarea" />
-              </q-step>
-              <q-step name="current-objectives" title="Objectifs actuels">
+              </q-tab-panel>
+              <q-tab-panel name="current-objectives">
                 <q-input v-model="details.currentObjectives" type="textarea" />
-              </q-step>
-              <q-step name="next-year-objectives" title="Objectifs pour l'année prochaine">
+              </q-tab-panel>
+              <q-tab-panel name="next-year-objectives">
                 <q-input v-model="details.nextYearObjectives" type="textarea" />
-              </q-step>
-              <q-step name="notes" title="Notes">
+              </q-tab-panel>
+              <q-tab-panel name="notes">
                 <q-input v-model="details.notes" type="textarea" />
-              </q-step>
-              <q-step name="rating" title="Évaluation">
+              </q-tab-panel>
+              <q-tab-panel name="rating">
                 <q-rating v-model="details.rating" max="5" />
-              </q-step>
-            </q-stepper>
+              </q-tab-panel>
+            </q-tab-panels>
           </q-card-section>
           <q-card-actions align="right">
             <q-btn v-close-popup flat label="Fermer" color="negative" />
@@ -60,8 +68,7 @@
           </q-card-actions>
         </q-card>
       </q-dialog>
-  
-      
+        
       <div class="fixed-bottom-right">
         <q-btn fab color="accent" icon="event" label="Convoquer entretien" @click="openConvokeDialog" />
       </div>
@@ -191,5 +198,9 @@
     right: 20px;
     bottom: 20px;
   }
+  .dialog-content {
+        width: 1200px;
+        max-width: 90%;
+    }
   </style>
   
