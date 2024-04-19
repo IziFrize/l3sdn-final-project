@@ -49,9 +49,7 @@ const users = ref([])
 
 onMounted(async () => {
   const user = await axios.get('https://rod-apps-restis-api-01.azurewebsites.net/api/gregsacha/users')
-  console.log(user)
   users.value = user.data
-  console.log(users)
 
 })
     

@@ -118,7 +118,7 @@
         interviewerInterviews.value = interviews.value.filter(interview => interview.interviewer_id === userId)
         intervieweeInterviews.value = interviews.value.filter(interview => interview.interviewee_id === userId)
         userOptions.value = users.value.map(user => user.username)
-        console.log(userOptions)
+  
       })
 
       const loginStore = useLoginStore()
@@ -154,7 +154,7 @@
   
       const saveDetails = () => {
         dialogOpen.value = false
-        console.log('Details saved:', details.value)
+    
       }
   
       const openConvokeDialog = () => {
@@ -176,7 +176,7 @@
         convokeDialogOpen.value = false
         newInterview.value = { interviewee_id: '', object: '', date: '', time: '' }
   
-        console.log('Nouvel entretien convoqué:', newEntretien)
+    
       }
   
       
